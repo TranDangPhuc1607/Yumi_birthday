@@ -1,0 +1,254 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #121212;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+/* Media container */
+#media-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: -1;
+}
+
+/* Centered video with size limit */
+#media-video {
+    width: 80vw;
+    height: auto;
+    max-height: 80vh;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    z-index: -1;
+}
+
+/* Heart */
+.heart {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    background-color: #ff6b6b;
+    transform: rotate(-45deg);
+    z-index: 1;
+    transition: transform 0.5s ease, background-color 0.5s ease;
+    cursor: pointer;
+}
+
+.heart:hover {
+    background-color: #ff4757;
+    transform: rotate(-45deg) scale(1.1);
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #ff6b6b;
+}
+
+.heart::before {
+    top: -60px;
+    left: 0;
+}
+
+.heart::after {
+    left: 60px;
+    top: 0;
+}
+
+.fireworks,
+.sparkles,
+.ripples {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.explosion {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #f9ca24;
+    border-radius: 50%;
+    opacity: 0;
+    animation: explode 1.2s ease-out infinite;
+}
+
+.sparkle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: #ffbe76;
+    border-radius: 50%;
+    opacity: 0;
+    animation: sparkle 1.5s ease-out infinite;
+}
+
+.ripple {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #1abc9c;
+    border-radius: 50%;
+    opacity: 0;
+    animation: ripple 2.5s ease-out infinite;
+}
+
+.message {
+    display: none;
+    margin-top: 20px;
+    font-size: 2.5em;
+    color: green;
+    z-index: 2;
+    animation: fadeIn 2.5s forwards;
+    animation-delay: 5s;
+    opacity: 0;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(60);
+        opacity: 0;
+    }
+}
+
+@keyframes sparkle {
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(25);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive for tablets and phones */
+@media (max-width: 1024px) {
+    .heart {
+        width: 90px;
+        height: 90px;
+    }
+
+    .heart::before,
+    .heart::after {
+        width: 90px;
+        height: 90px;
+    }
+
+    .heart::before {
+        top: -45px;
+    }
+
+    .heart::after {
+        left: 45px;
+    }
+
+    .message {
+        font-size: 2em;
+    }
+
+    #media-video {
+        width: 90vw;
+        max-height: 70vh;
+    }
+}
+
+@media (max-width: 600px) {
+    .heart {
+        width: 70px;
+        height: 70px;
+    }
+
+    .heart::before,
+    .heart::after {
+        width: 70px;
+        height: 70px;
+    }
+
+    .heart::before {
+        top: -35px;
+    }
+
+    .heart::after {
+        left: 35px;
+    }
+
+    .message {
+        font-size: 1.5em;
+        padding: 0 10px;
+    }
+
+    #media-video {
+        width: 95vw;
+        max-height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .message {
+        font-size: 1.4em;
+        padding: 0 10px;
+        white-space: pre-line;
+        word-break: break-word;
+    }
+
+    /* Break message into 1 word per line using JS-friendly ID */
+    #message.break-vertical {
+        display: block;
+    }
+}
